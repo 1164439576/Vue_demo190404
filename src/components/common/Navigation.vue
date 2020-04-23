@@ -1,0 +1,240 @@
+<template>
+  <el-container class="container">
+    <div class="header1">
+      <div class="logoDiv" @click="gotoHome()">
+        <div class="logoDiv1"><img src="/static/picture/logo.png"/></div>
+        <div class="logoDiv2"><img src="/static/picture/yzsh.png"/></div>
+        <div class="logoDiv3"><img src="/static/picture/sqpt.png"/></div>
+      </div>
+      <!--<h1 class="title">益众生活社区平台</h1>-->
+      <div class="searchDiv">
+        <el-input
+          class="search"
+          placeholder="请输入内容"
+          v-model="input"
+          clearable>
+        </el-input>
+        <el-button type="primary" icon="el-icon-search" class='search-button' @click="gotoSearchPage()">搜索</el-button>
+      </div>
+    </div>
+    <el-header>
+      <el-menu
+        :default-active="activeIndex2"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b">
+        <el-menu-item index="1"  @click="gotoHome()">首页</el-menu-item>
+        <el-submenu index="2">
+          <template slot="title">浏览帖子</template>
+          <el-menu-item index="2-1">选项1</el-menu-item>
+          <el-menu-item index="2-2">选项2</el-menu-item>
+          <el-menu-item index="2-3">选项3</el-menu-item>
+          <el-submenu index="2-4">
+            <template slot="title">选项4</template>
+            <el-menu-item index="2-4-1">选项1</el-menu-item>
+            <el-menu-item index="2-4-2">选项2</el-menu-item>
+            <el-menu-item index="2-4-3">选项3</el-menu-item>
+          </el-submenu>
+        </el-submenu>
+        <el-menu-item index="3" @click="gotoReleasePost()">发布帖子</el-menu-item>
+
+        <el-dropdown class="dropdown">
+          <el-button type="primary" class="username-button" @click="gotoPersonalCenter()">
+            用户昵称<i class="el-icon-arrow-down el-icon--right"></i>
+          </el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>个人中心</el-dropdown-item>
+            <el-dropdown-item>我的关注</el-dropdown-item>
+            <el-dropdown-item>我的帖子</el-dropdown-item>
+            <el-dropdown-item>我的评论</el-dropdown-item>
+            <el-dropdown-item>退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </el-menu>
+
+    </el-header>
+
+  </el-container>
+</template>
+
+<script>
+
+    export default {
+      name: "Navigation",
+
+      data() {
+        return {
+          input: '',
+          activeIndex: '1',
+          activeIndex2: '1'
+        };
+      },
+      methods: {
+        handleSelect(key, keyPath) {
+          console.log(key, keyPath);
+        },
+        gotoPersonalCenter(){
+          this.$router.push({path:'/personalCenter'})
+        },
+        gotoSearchPage(){
+          this.$router.push({path:'/SearchPage'})
+        },
+        gotoHome(){
+          this.$router.push({path:'/Home'})
+        },
+        gotoReleasePost(){
+          this.$router.push({path:'/releasePost'})
+        }
+      }
+
+    }
+</script>
+
+<style scoped>
+  .logoDiv1{
+    float: left;
+    position: relative;
+    left: -50px;
+  }
+  .logoDiv2{
+    float: left;
+    position: relative;
+    left: -50px;
+    bottom: 10px;
+  }
+  .logoDiv3{
+    float: left;
+    position: relative;
+    left: -74px;
+    bottom: 10px;
+  }
+
+
+  .logoDiv{
+    color: brown;
+    font-family: 华文中宋;
+    font-size: xx-large;
+    text-align: left;
+    float: left;
+  }
+  .search{
+    width: 40%;
+    float: left;
+    padding: 8px;
+    position: relative;
+
+  }
+  .search-button{
+    float: left;
+    padding: 12px;
+    margin: 8px;
+    position: relative;
+  }
+  .searchDiv{
+    position: relative;
+    top: 24px;
+  }
+  .dropdown{
+    margin: 8px;
+    float: right;
+  }
+  .username-button{
+    background-color: transparent;
+    border-color: transparent;
+
+  }
+
+
+
+  .el-carousel__item h3 {
+    background-image: url("/static/picture/background.png");
+
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
+  }
+
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+
+
+
+
+  .el-dropdown {
+    vertical-align: top;
+  }
+  .el-dropdown + .el-dropdown {
+    margin-left: 15px;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+
+
+
+  .el-header, .el-footer {
+    background-image: url("/static/picture/background.png");
+    /*background-color: #B3C0D1;*/
+    color: #333;
+    text-align: center;
+    line-height: 0px;
+  }
+
+
+  .el-aside {
+    background-color: #D3DCE6;
+    color: #333;
+    text-align: center;
+    line-height: 50px;
+  }
+
+
+  /*main列表*/
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    line-height: 150px;
+  }
+  .el-menu-demo{
+    width: 1600px;
+    position: relative;
+    left: -20px;
+  }
+
+  body > .el-container {
+    margin-bottom: 40px;
+  }
+
+
+
+  .el-container:nth-child(5) .el-aside,
+  .el-container:nth-child(6) .el-aside {
+    line-height: 260px;
+  }
+
+  .el-container:nth-child(7) .el-aside {
+    line-height: 320px;
+  }
+  .header1{
+    height: 90px;
+  }
+  .container{
+    height: 150px;
+    position: relative;
+    left: -158px;
+  }
+
+
+
+</style>
