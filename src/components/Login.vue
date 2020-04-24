@@ -7,12 +7,12 @@
       </div>
       <el-form ref="form"  :rules="rules" :model="form" label-width="80px" class="login-box">
         <h3 class="login-title">欢迎登录</h3>
-        <el-form-item label="手机号码:" prop="userTel" >
-          <el-input v-model="form.userTel"></el-input>
+        <el-form-item label="手机号码:" prop="teloremail" >
+          <el-input v-model="form.teloremail "></el-input>
         </el-form-item>
 
-        <el-form-item label="密码:" prop="userPwd">
-          <el-input v-model="form.userPwd"></el-input>
+        <el-form-item label="密码:" prop="password">
+          <el-input v-model="form.password"></el-input>
         </el-form-item>
 
         <el-form-item class="login-button">
@@ -24,22 +24,24 @@
 </template>
 
 <script>
+  import Qs from 'qs'
     export default {
         name: "Login",
         data() {
           return {
+
             form: {
-              userTel: '',
-              userPwd: ''
+              teloremail : '',
+              password: ''
             },
             rules:{
-              userTel: [
+              teloremail : [
                 { required: true, message: '请输入电话', trigger: 'blur' },
-                { min: 11, max: 11, message: '长度必须是11个数字', trigger: 'blur' }
+                { min: 1, max: 11, message: '长度必须是11个数字', trigger: 'blur' }
               ],
-              userPwd: [
+              password: [
                 { required: true, message: '请输入密码', trigger: 'blur' },
-                { min: 6, max: 50, message: '长度在 5 到 50 个字符', trigger: 'blur' }
+                { min: 1, max: 50, message: '长度在 6 到 50 个字符', trigger: 'blur' }
               ]
             }
           }
@@ -47,16 +49,20 @@
         methods:{
           onSubmit(formName){
             var vm = this;
-            vm.$router.push("/home");
+            // vm.$router.push("/home");
 
             this.$refs[formName].validate((valid) => {
               if (valid) {
                 //表单验证成功，要发送登录请求
                 this.axios({
-                  method: 'GET',
-                  url: 'http://39.106.120.220:81/userlogin?teloremail='+vm.form.userTel+'&password='+vm.form.userPwd
+                  method: 'POST',
+                  url: 'http://39.106.120.220:81/userlogin',
+                  transformRequest:[function (data) {
+                    return Qs.stringify(data);
+                  }],
+                  data:this.form,
                 }).then(function(resp){
-                  if(resp.data.result){
+                  if(resp.data.data){
                     var user = resp.data.data;
                     sessionStorage.setItem("isLogin","true")
                     //往vuex里存放一个user对象
@@ -85,15 +91,11 @@
               }
             });
 
-
           },
           regist(){
             console.log("注册")
             this.$router.push({path:'/registPage'})
-
           }
-
-
 
         }
     }
@@ -117,7 +119,6 @@
     left: -74px;
     bottom: 10px;
   }
-
 
   .logoDiv{
     font-size: xx-large;

@@ -62,22 +62,7 @@
             checkPass: '',
 
           },
-          user:{
-            uAddress: "",
-            uCreateTime: "",
-            uEmail: "",
-            uEx: 0,
-            uGoldnum: 0,
-            uHeadurl: "",
-            uId: 0,
-            uName: "",
-            uPassword: "",
-            uProfile: "",
-            uSex: "",
-            uTel: "",
-            uTitlenum: 0,
-            uUpdateTime: ""
-        },
+
           rules: {
             email:[
               { required: true, message: '请输入邮箱地址', trigger: 'blur' },
@@ -104,27 +89,29 @@
         submitForm(formName) {
           this.$refs[formName].validate((valid) => {
             if (valid) {
-              // alert('submit!');
-              // console.log(this.ruleForm.username);
-              this.user.uTel=this.ruleForm.userTel;
-              this.user.uName=this.ruleForm.username;
-              this.user.uPassword=this.ruleForm.pass;
-              console.log(this.ruleForm.username);
-              console.log(this.user);
+
               var vm =this;
-              this.axios({
-                method: 'POST',
-                // url:'http://39.106.120.220:81/user',
-                url:' https://www.easy-mock.com/mock/5e96f99f2844940a9ebd97cf/user',
-                // headers: { 'content-type': 'application/json;charset=utf-8'},
-                // headers: { 'content-type': 'application/json;charset=utf-8' },
-                transformRequest:[function (data) {
-                  return Qs.stringify(data);
-                }],
-                data:this.user
+
+              this.axios.post('http://39.106.120.220:81/user',{
+                "uAddress": null,
+                "uCreateTime": null,
+                "uEmail": null,
+                "uEnable": null,
+                "uEx": null,
+                "uGoldnum": null,
+                "uHeadurl": null,
+                "uId": null,
+                "uName": this.ruleForm.username,
+                "uPassword": this.ruleForm.pass,
+                "uProfile": null,
+                "uSex": null,
+                "uTel": this.ruleForm.userTel,
+                "uTitlenum": null,
+                "uUpdateTime": null
+
               }).then(function (resp) {
-                console.log(response.data);
-                /*if(resp.data.success){
+
+                if(resp.data.data){
                   alert('submit!');
                   vm.$message({
                     message: resp.data.message,
@@ -132,14 +119,15 @@
                   });
                   setTimeout(function(){
                     // vm.$router.push("/orders");
-                    this.$router.push({path:'/Login'})
+                    vm.$router.push({path:'/Login'})
                   },2000)
                 }else{
                   vm.$message.error(resp.data.message);
-                }*/
+                }
+
+              }).catch(function (error) {
+                console.log(error)
               })
-
-
 
             } else {
               console.log('error submit!!');

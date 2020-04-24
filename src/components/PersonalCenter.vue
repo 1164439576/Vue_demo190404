@@ -66,25 +66,31 @@
           </div>
 
           <el-tabs type="border-card">
-            <el-tab-pane label="我的帖子">
-              <!--<Infinitelist></Infinitelist>-->
-              <MyPostsList></MyPostsList>
+            <el-tab-pane  @click.native="gotoMyPostsList()" label="我的帖子" >
+              <!--<MyPostsList></MyPostsList>-->
             </el-tab-pane>
-            <el-tab-pane label="我的收藏">
-             <MyFavoriteList></MyFavoriteList>
+            <el-tab-pane label="我的收藏"  @click="gotoMyFavoriteList()">
+             <!--<MyFavoriteList></MyFavoriteList>-->
             </el-tab-pane>
-            <el-tab-pane label="我的评论">
-              <CommentList></CommentList>
+            <el-tab-pane label="我的评论"  @click="gotoCommentList()">
+              <!--<CommentList></CommentList>-->
             </el-tab-pane>
-            <el-tab-pane label="我的关注">
-              我的关注
+            <el-tab-pane label="我的关注"  @click="gotoUserListConcerns()">
+              <!--<UserListConcerns></UserListConcerns>-->
             </el-tab-pane>
-            <el-tab-pane label="我的粉丝">
-              我的粉丝
+            <el-tab-pane label="我的粉丝" @click="gotoUserListFans()">
+              <!--<UserListFans></UserListFans>-->
             </el-tab-pane>
           </el-tabs>
 
+
+
+          <div class="listDiv">
+            <router-view></router-view>
+          </div>
+
         </el-main>
+        <!--右侧边栏-->
         <!--右侧边栏-->
         <el-aside width="400px">
 
@@ -104,6 +110,8 @@
   import MyPostsList from "../components/common/MyPostsList"
   import MyFavoriteList from "../components/common/MyFavoriteList"
   import CommentList from "../components/common/CommentList"
+  import UserListConcerns from "./common/UserListConcerns"
+  import UserListFans from "./common/UserListFans"
 
 
     export default {
@@ -111,7 +119,9 @@
         data() {
           return {
             imageUrl: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-            circleUrl: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
+            circleUrl: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+            activeIndex: '1',
+            activeIndex2: '1'
           }
         },
         methods: {
@@ -132,7 +142,28 @@
           },
           goBack() {
             console.log('go back');
+          },
+          handleSelect(key, keyPath) {
+            console.log(key, keyPath);
+          },
+
+          gotoMyPostsList(){
+            this.$router.push({path:'/personalCenter/MyPostsList'})
+          },
+          gotoMyFavoriteList(){
+            this.$router.push({path:'/personalCenter/MyFavoriteList'})
+          },
+          gotoCommentList(){
+            this.$router.push({path:'/personalCenter/CommentList'})
+          },
+          gotoUserListConcerns(){
+            this.$router.push({path:'/personalCenter/UserListConcerns'})
+          },
+          gotoUserListFans(){
+            this.$router.push({path:'/personalCenter/UserListFans'})
           }
+
+
         },
       components: {
         Navigation,
@@ -140,13 +171,20 @@
         Infinitelist,
         MyPostsList,
         MyFavoriteList,
-        CommentList
+        CommentList,
+        UserListConcerns,
+        UserListFans
       }
     }
 
 </script>
 
 <style scoped>
+  .listDiv{
+    width: 100%;
+    background-color: white;
+  }
+
   .profile{
     height: 60px;
     margin-top: 20px;

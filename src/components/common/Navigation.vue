@@ -41,12 +41,12 @@
         </el-submenu>
         <el-menu-item index="3" @click="gotoReleasePost()">发布帖子</el-menu-item>
 
-        <el-dropdown class="dropdown">
+        <el-dropdown v-if="islogin" class="dropdown">
           <el-button type="primary" class="username-button" @click="gotoPersonalCenter()">
-            用户昵称<i class="el-icon-arrow-down el-icon--right"></i>
+            欢迎你，{{uName}}<i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>个人中心</el-dropdown-item>
+            <el-dropdown-item ><span @click="gotoPersonalCenter()">个人中心</span></el-dropdown-item>
             <el-dropdown-item>我的关注</el-dropdown-item>
             <el-dropdown-item>我的帖子</el-dropdown-item>
             <el-dropdown-item>我的评论</el-dropdown-item>
@@ -69,7 +69,9 @@
         return {
           input: '',
           activeIndex: '1',
-          activeIndex2: '1'
+          activeIndex2: '1',
+          uName:this.$store.getters.getUser.uName,
+          islogin: this.$store.getters.getUser==null?false:true,
         };
       },
       methods: {

@@ -127,7 +127,7 @@
   ul li{
     list-style-type:none;
     background-color: #ECFFFF;
-    background-image: url("/static/picture/background8.png");
+    background-image: url("/static/picture/background11.png");
     height: 250px;
     border: #CCC 2px solid;
     position: relative;

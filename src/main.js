@@ -32,7 +32,7 @@ Vue.prototype.axios = axios;
 
 
 // 在跳转前执行
-/*router.beforeEach((to, form, next) => {
+router.beforeEach((to, form, next) => {
   // 获取用户登录状态
   let isLogin = sessionStorage.getItem('isLogin');
   // 注销
@@ -56,7 +56,7 @@ Vue.prototype.axios = axios;
   }
   // 下一个路由
   next();
-});*/
+});
 
 /* eslint-disable no-new */
 new Vue({

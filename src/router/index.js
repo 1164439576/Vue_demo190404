@@ -10,6 +10,11 @@ import  DetailsPage from '../components/DetailsPage'
 import  ReleasePost from '../components/ReleasePost'
 import  SearchPage from '../components/SearchPage'
 import  PersonalCenter from '../components/PersonalCenter'
+import MyPostsList from "../components/common/MyPostsList"
+import MyFavoriteList from "../components/common/MyFavoriteList"
+import CommentList from "../components/common/CommentList"
+import UserListConcerns from "../components/common/UserListConcerns"
+import UserListFans from "../components/common/UserListFans"
 
 
 
@@ -66,7 +71,14 @@ export default new Router({
     {
       path:'/personalCenter',
       name:'PersonalCenter',
-      component:PersonalCenter
+      component:PersonalCenter,
+      children:[
+        {path:'/personalCenter/MyPostsList',component:MyPostsList},
+        {path:'/personalCenter/MyFavoriteList',component:MyFavoriteList},
+        {path:'/personalCenter/CommentList',component:CommentList},
+        {path:'/personalCenter/UserListConcerns',component:UserListConcerns},
+        {path:'/personalCenter/UserListFans',component:UserListFans},
+      ]
     }
   ]
 

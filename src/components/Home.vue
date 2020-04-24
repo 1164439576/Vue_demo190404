@@ -43,10 +43,14 @@
         return {
           input: '',
           activeIndex: '1',
-          activeIndex2: '1'
+          activeIndex2: '1',
+          pros:null,
+          uName:this.$store.getters.getUser.uName,
+          islogin: this.$store.getters.getUser==null?false:true,
         };
       },
       methods: {
+
         handleSelect(key, keyPath) {
           console.log(key, keyPath);
         },
