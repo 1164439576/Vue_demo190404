@@ -14,7 +14,6 @@
             <img src="http://39.106.120.220/group1/M00/00/00/J2p43F6bxYeAKgswAADaazaI7BY048.jpg"/>
           </el-avatar>
 
-
         </div>
         <h5 id="username">作者名称</h5>
 

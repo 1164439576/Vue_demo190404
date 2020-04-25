@@ -7,8 +7,11 @@
 
       <el-container class="bodyDiv">
 
+
       <!--中间主体-->
       <el-main class="main">
+        <el-page-header @back="goBack" content="发帖页面"  class="back"> </el-page-header>
+        <el-divider></el-divider>
 
         <div class="div1">
         <span class="mainPicture"> 添加主图:&nbsp </span>
@@ -292,6 +295,10 @@
       },
 
       methods: {
+        goBack() {
+          console.log('go back');
+          history.back();
+        },
         onEditorBlur() {
           console.log("ss");
           console.log(content);
@@ -329,6 +336,11 @@
 </script>
 
 <style scoped>
+  .back{
+    position: relative;
+    left: -140px;
+    
+  }
   .successButtonDiv{
     text-align: center;
   }
@@ -397,7 +409,7 @@
   .main{
     height: 1200px;
     /*background-color: whitesmoke;*/
-    background-image: url("../assets/picture/background6.png");
+    background-image: url("../assets/picture/background11.png");
     padding-left: 10%;
 
   }
@@ -438,7 +450,7 @@
     display: block;
   }
   .container{
-    margin-left: 10%;
+    margin-left: 15%;
     width: 1600px;
   }
   .bodyDiv{

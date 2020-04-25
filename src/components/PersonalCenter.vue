@@ -34,8 +34,8 @@
                   用户1231231
                 </h2 >
                 <div class="title-setting">
-                  <div><i class="el-icon-present"></i>   <el-button type="info" plain>积分兑换</el-button></div>
-                  <div><i class="el-icon-setting"></i>   <el-button type="info" plain>账户设置</el-button></div>
+                  <div><i class="el-icon-present"></i>   <el-button type="info" plain @click="gotoGiftPage()">积分兑换</el-button></div>
+                  <div><i class="el-icon-setting"></i>   <el-button type="info" plain @click="gotoSettingPage()">账户设置</el-button></div>
                 </div>
 
               </div>
@@ -64,26 +64,14 @@
               </div>
             </div>
           </div>
-
-          <el-tabs type="border-card">
-            <el-tab-pane  @click.native="gotoMyPostsList()" label="我的帖子" >
-              <!--<MyPostsList></MyPostsList>-->
-            </el-tab-pane>
-            <el-tab-pane label="我的收藏"  @click="gotoMyFavoriteList()">
-             <!--<MyFavoriteList></MyFavoriteList>-->
-            </el-tab-pane>
-            <el-tab-pane label="我的评论"  @click="gotoCommentList()">
-              <!--<CommentList></CommentList>-->
-            </el-tab-pane>
-            <el-tab-pane label="我的关注"  @click="gotoUserListConcerns()">
-              <!--<UserListConcerns></UserListConcerns>-->
-            </el-tab-pane>
-            <el-tab-pane label="我的粉丝" @click="gotoUserListFans()">
-              <!--<UserListFans></UserListFans>-->
-            </el-tab-pane>
+          <el-divider ></el-divider>
+          <el-tabs v-model="activeName" type="card" @tab-click="handleClick(activeName)">
+            <el-tab-pane label="我的帖子" name="first" ><h2>我的帖子</h2></el-tab-pane>
+            <el-tab-pane label="我的收藏" name="second" ><h2>我的收藏</h2></el-tab-pane>
+            <el-tab-pane label="我的评论" name="third" ><h2>我的评论</h2></el-tab-pane>
+            <el-tab-pane label="我的关注" name="fourth" ><h2>我的关注</h2></el-tab-pane>
+            <el-tab-pane label="我的粉丝" name="fifth" ><h2>我的粉丝</h2></el-tab-pane>
           </el-tabs>
-
-
 
           <div class="listDiv">
             <router-view></router-view>
@@ -120,8 +108,7 @@
           return {
             imageUrl: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
             circleUrl: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-            activeIndex: '1',
-            activeIndex2: '1'
+            activeName: 'first'
           }
         },
         methods: {
@@ -141,26 +128,51 @@
             return isJPG && isLt2M;
           },
           goBack() {
+            history.back();
             console.log('go back');
           },
-          handleSelect(key, keyPath) {
-            console.log(key, keyPath);
+          handleClick(activename) {
+            if(activename=="first"){
+              this.$router.push({path:'/personalCenter/MyPostsList'})
+            }else if(activename=="second"){
+              this.$router.push({path:'/personalCenter/MyFavoriteList'})
+            }
+            else if(activename=="third"){
+              this.$router.push({path:'/personalCenter/CommentList'})
+            }
+            else if(activename=="fourth"){
+              this.$router.push({path:'/personalCenter/UserListConcerns'})
+            }else if(activename=="fifth"){
+              this.$router.push({path:'/personalCenter/UserListFans'})
+            }else{
+              error()
+            }
+          },
+          gotoSettingPage(){
+            this.$router.push({path:'/settingPage'})
+          },
+          gotoGiftPage(){
+            this.$router.push({path:'/giftPage'})
+          },
+          tip(){
+            this.$message('这是一条消息提示');
+          },
+          success() {
+            this.$message({
+              message: '恭喜你，这是一条成功消息',
+              type: 'success'
+            });
           },
 
-          gotoMyPostsList(){
-            this.$router.push({path:'/personalCenter/MyPostsList'})
+          warning() {
+            this.$message({
+              message: '警告哦，这是一条警告消息',
+              type: 'warning'
+            });
           },
-          gotoMyFavoriteList(){
-            this.$router.push({path:'/personalCenter/MyFavoriteList'})
-          },
-          gotoCommentList(){
-            this.$router.push({path:'/personalCenter/CommentList'})
-          },
-          gotoUserListConcerns(){
-            this.$router.push({path:'/personalCenter/UserListConcerns'})
-          },
-          gotoUserListFans(){
-            this.$router.push({path:'/personalCenter/UserListFans'})
+
+          error() {
+            this.$message.error('页码错误哦~');
           }
 
 
@@ -182,7 +194,6 @@
 <style scoped>
   .listDiv{
     width: 100%;
-    background-color: white;
   }
 
   .profile{
@@ -272,6 +283,7 @@
   .div3{
     height: 250px;
     background-color: #d0d0d0;
+    background-image: url("../assets/picture/background5.png");
   }
 
   .link{
@@ -333,7 +345,7 @@
   }
 
   .container{
-    margin-left: 10%;
+    margin-left: 15%;
     width: 1600px;
   }
   body{

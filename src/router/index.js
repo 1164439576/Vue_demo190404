@@ -9,6 +9,8 @@ import  YouXuanHaoWuPage from '../components/YouXuanHaoWuPage'
 import  DetailsPage from '../components/DetailsPage'
 import  ReleasePost from '../components/ReleasePost'
 import  SearchPage from '../components/SearchPage'
+import  SettingPage from '../components/SettingPage'
+import  GiftPage from '../components/GiftPage'
 import  PersonalCenter from '../components/PersonalCenter'
 import MyPostsList from "../components/common/MyPostsList"
 import MyFavoriteList from "../components/common/MyFavoriteList"
@@ -72,14 +74,28 @@ export default new Router({
       path:'/personalCenter',
       name:'PersonalCenter',
       component:PersonalCenter,
+      redirect:'/personalCenter/MyPostsList',
       children:[
         {path:'/personalCenter/MyPostsList',component:MyPostsList},
         {path:'/personalCenter/MyFavoriteList',component:MyFavoriteList},
         {path:'/personalCenter/CommentList',component:CommentList},
         {path:'/personalCenter/UserListConcerns',component:UserListConcerns},
         {path:'/personalCenter/UserListFans',component:UserListFans},
+
       ]
+    },
+    {
+      path:'/settingPage',
+      name:'SettingPage',
+      component:SettingPage
+    },
+    {
+      path:'/giftPage',
+      name:'GiftPage',
+      component:GiftPage
     }
+
+
   ]
 
 })

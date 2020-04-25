@@ -228,7 +228,7 @@
   body{
     position: relative;
     top: 40px;
-    background-image: url("/static/picture/4.png")
+    /*background-image: url("/static/picture/4.png")*/
 
   }
 

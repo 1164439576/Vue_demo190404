@@ -2,7 +2,7 @@
   <body>
   <el-container class="container">
     <div class="titleDiv">
-      <navigation></navigation>
+      <navigation class="navigation"></navigation>
     </div>
 
     <el-container>
@@ -185,11 +185,14 @@
     line-height: 320px;
   }
 
+
+
   .titleDiv{
+    height: 150px;
   }
 
   .container{
-    margin-left: 10%;
+    margin-left: 15%;
     width: 1600px;
   }
   body{

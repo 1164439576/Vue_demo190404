@@ -159,7 +159,7 @@
   .img1{
     top: 50px;
     float: left;
-    width: 300px;
+    width: 250px;
     height: 200px;
   }
 
@@ -218,10 +218,11 @@
   }
   ul li{
     list-style-type:none;
-    background-color: #FFF3EE;
+    /*background-color: #FFF3EE;*/
     height: 250px;
     width: 90%;
-    border: #CCC 2px solid;
+    border: #FF95CA 2px solid;
+    margin-top: 5px;
   }
   #img1{
     width: 200px;

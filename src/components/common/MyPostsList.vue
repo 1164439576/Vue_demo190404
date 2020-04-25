@@ -141,6 +141,10 @@
     border: #CCC 2px solid;
     position: relative;
     left: -25px;
+    margin-top: 5px;
+  }
+  li :hover{
+    cursor: pointer;
   }
   ul{
     margin: 0px;

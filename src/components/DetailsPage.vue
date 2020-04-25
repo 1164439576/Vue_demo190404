@@ -99,6 +99,9 @@
     line-height: 300px;
     margin: 0;
   }
+  .body{
+    background-image: url("../assets/picture/background5.png");
+  }
 
 
 
@@ -125,7 +128,7 @@
   }
 
   .el-aside {
-    background-color: #D3DCE6;
+    /*background-color: #D3DCE6;*/
     color: #333;
     text-align: center;
     line-height: 50px;
@@ -134,7 +137,7 @@
 
   /*main列表*/
   .el-main {
-    background-color: #E9EEF3;
+    /*background-color: #E9EEF3;*/
     color: #333;
     text-align: center;
     line-height: 150px;
@@ -154,7 +157,7 @@
   }
 
   .container{
-    margin-left: 10%;
+    margin-left: 15%;
     width: 1600px;
   }
   body{

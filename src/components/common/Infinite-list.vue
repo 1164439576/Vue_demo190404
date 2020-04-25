@@ -12,16 +12,16 @@
         <div class="author">
           <div class="demo-type">
             <el-avatar :size="60" src="https://empty" >
-              <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+              <img src="http://39.106.120.220/group1/M00/00/00/J2p43F6bxYeAKgswAADaazaI7BY048.jpg"/>
             </el-avatar>
           </div>
-          <span class="author-name"> sss </span>
+          <span class="author-name"> 繁星、晚风 </span>
         </div>
         <div class="time">
           2020年4月17日23:55:39 &nbsp;&nbsp;&nbsp;
           <i class="el-icon-thumb"> 点赞数:99</i> &nbsp;&nbsp;&nbsp;
           <i class="el-icon-star-off">收藏数:899</i>
-          <el-button class="link" type="primary" @click="gotoDetailsPage()">查看详情</el-button>
+          <el-button class="link" type="primary" @click="gotoDetailsPage()"><b>查看详情</b></el-button>
         </div>
       </div>
     </li>
@@ -59,9 +59,21 @@
 
 </script>
 
+
+
 <style scoped>
   .fenye{
     line-height: 30px;
+  }
+  .link{
+    position: relative;
+    left: 80%;
+    top: 5px;
+    background-color: transparent;
+    color: darkturquoise;
+    border-color: palevioletred;
+    font-family: 微软雅黑;
+    /*background-image: url("../../assets/picture/background3.png");*/
   }
 
 
@@ -127,15 +139,17 @@
   ul li{
     list-style-type:none;
     background-color: #ECFFFF;
-    background-image: url("/static/picture/background11.png");
+    background-image: url("../../assets/picture/background10.png");
     height: 250px;
     border: #CCC 2px solid;
     position: relative;
     left: -25px;
+    margin-top: 5px;
   }
   ul{
     margin: 0px;
   }
+
   body{
   }
 

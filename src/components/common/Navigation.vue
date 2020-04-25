@@ -14,7 +14,7 @@
           v-model="input"
           clearable>
         </el-input>
-        <el-button type="primary" icon="el-icon-search" class='search-button' @click="gotoSearchPage()">搜索</el-button>
+        <el-button type="primary" icon="el-icon-search" class='search-button' @click="gotoSearchPage()"><strong>搜索</strong></el-button>
       </div>
     </div>
     <el-header>
@@ -121,19 +121,22 @@
     font-size: xx-large;
     text-align: left;
     float: left;
+
   }
   .search{
     width: 40%;
     float: left;
     padding: 8px;
     position: relative;
-
   }
   .search-button{
     float: left;
     padding: 12px;
     margin: 8px;
     position: relative;
+    background-color: transparent;
+    color: crimson;
+    border-color: crimson;
   }
   .searchDiv{
     position: relative;
@@ -234,7 +237,8 @@
   .container{
     height: 150px;
     position: relative;
-    left: -158px;
+
+    left: -238px;
   }
 
 
