@@ -9,6 +9,7 @@
 
 
       <!--中间主体-->
+      <!--中间主体-->
       <el-main class="main">
         <el-page-header @back="goBack" content="发帖页面"  class="back"> </el-page-header>
         <el-divider></el-divider>
