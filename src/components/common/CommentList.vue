@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <h2>我的评论</h2>
     <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto" >
       <li v-for="item in 10" :key="item">
 

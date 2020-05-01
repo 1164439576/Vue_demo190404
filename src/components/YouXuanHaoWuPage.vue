@@ -7,7 +7,7 @@
       <el-container>
         <!--中间主体-->
         <el-main>
-          <HaoWuList></HaoWuList>
+          <HaoWuList :codeone="codeone" :codetwo="codetwo" ></HaoWuList>
         </el-main>
         <!--右侧边栏-->
         <el-aside width="400px">
@@ -31,14 +31,28 @@
     data() {
       return {
         activeIndex: '1',
-        activeIndex2: '1'
+        activeIndex2: '1',
+
+        codeone:'0',
+        codetwo:'0'
+
       };
     },
+
+
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
       }
     },
+
+    beforeCreate(){
+
+      this.codeone=this.$route.query.codeone;
+      this.codetwo=this.$route.query.codetwo;
+
+    },
+
     components: {
       Navigation,
       Classification,

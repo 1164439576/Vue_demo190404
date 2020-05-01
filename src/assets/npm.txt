@@ -4,6 +4,7 @@ cnpm install vuex --save
 cnpm install vue-router --save
 cnpm install vue-quill-editor --save
 cnpm install qs --save
+npm install vue-pagination-2
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 npm install --registry=https://registry.npm.taobao.org
 

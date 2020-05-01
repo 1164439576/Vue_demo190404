@@ -23,7 +23,7 @@
       >
       </quill-editor>
     </el-row>
-    <button v-on:click="saveHtml" calss="save">保存</button>
+    <button v-on:click="saveHtml" id='save' class="save">保存</button>
   </div>
 </template>
 <script>
@@ -45,7 +45,7 @@
     [{'color': []}, {'background': []}],          // dropdown with defaults from theme
     [{'font': []}],
     [{'align': []}],
-    ['link', 'image', 'video'],
+    ['link'],/*, 'image', 'video'*/
     ['clean']                                         // remove formatting button
   ]
   export default {
@@ -114,7 +114,8 @@
       onEditorFocus(){}, // 获得焦点事件
       onEditorChange(){}, // 内容改变事件
       saveHtml:function(event){
-        alert(this.detailContent);
+        this.$emit('detailContent',this.detailContent);
+        // alert(this.detailContent);
       }
     }
   }
@@ -124,6 +125,7 @@
     height: 400px;
   }
   .save{
+    visibility: hidden;
     top: 100px;
   }
 

@@ -20,7 +20,7 @@
       </div>
       <div id="div3">
         2020年4月17日23:55:39    &nbsp;&nbsp;&nbsp;
-        <i class="el-icon-thumb"> 点赞数:99</i>  &nbsp;&nbsp;&nbsp;
+        <i class="el-icon-thumb"> 点赞数:99</i> &nbsp; &nbsp;<i class="el-icon-thumb">  点踩数:99</i>  &nbsp; &nbsp;
         <i class="el-icon-star-off">收藏数:899</i>
       </div>
 
@@ -31,6 +31,21 @@
         </span>
 
       </div>
+
+      <el-row  class="buttons1">
+        <el-button type="success" icon="el-icon-check" circle  width="50px" height="50px"></el-button>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <el-button type="danger" icon="el-icon-close" circle></el-button>
+      </el-row>
+      <div class="buttons2">
+        <strong><p>
+          顶！ &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收藏   &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;踩!
+        </p></strong>
+      </div>
+
+
 
 
 
@@ -57,6 +72,17 @@
 </script>
 
 <style scoped>
+  .buttons2{
+    padding-top: 10px;
+    line-height: 20px;
+    font-size: x-large;
+    color: crimson;
+    padding-bottom: 10px;
+  }
+  .buttons1{
+    line-height: 40px;
+    padding-top: 20px;
+  }
 
   .body{
     background-color: dimgrey;
@@ -71,7 +97,7 @@
     height: 300px;
     clear: both;
   }
-  
+
   #div2{
     padding: 0px;
     width: 80%;

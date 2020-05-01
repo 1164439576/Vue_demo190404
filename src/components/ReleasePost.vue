@@ -32,23 +32,25 @@
           <el-input
             class="input"
             placeholder="请输入内容"
-            v-model="input"
+            v-model="post.titlename"
             clearable>
           </el-input>
         </div>
 
         <div class="editor">
           <span class="editorTitle"> 输入正文:&nbsp </span>
-          <Editor></Editor>
+          <Editor :mytext="text" @detailContent="text=$event"></Editor>
         </div>
 
         <div class="settingDiv">
           <div>
             <span class="leibieTitle">设置类别：</span>
             <div class="block">
-              <span class="demonstration">设置选择类别：</span>
+              <span class="demonstration">设置选择帖子类别：</span>
               <el-cascader
-                placeholder="试试搜索：指南"
+                @change="OnClick"
+                ref="myCascader"
+                placeholder="帖子类别"
                 :options="options"
                 filterable></el-cascader>
             </div>
@@ -57,15 +59,18 @@
           <div class="block">
             <span class="demonstration">设置活动时间范围：</span>
             <el-date-picker
+              @change="OnClick2"
               v-model="date"
               type="datetimerange"
+              format="yyyy-MM-dd HH:mm:ss"
+              value-format="yyyy-MM-dd HH:mm:ss"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
               :default-time="['12:00:00']">
             </el-date-picker>
           </div>
           <div class="successButtonDiv">
-            <el-button type="success">点击发布</el-button>
+            <el-button type="success" @click="releaseButton()">点击发布</el-button>
           </div>
         </div>
       </el-main>
@@ -91,210 +96,441 @@
         return {
           activeIndex: '1',
           activeIndex2: '1',
-          content:null,
+          //富文本
+          text:'',
           editorOption:{},
           imageUrl: '',
-          input: '',
+
           date:'',
-          options: [{
-            value: 'zhinan',
-            label: '指南',
-            children: [{
-              value: 'shejiyuanze',
-              label: '设计原则',
-              children: [{
-                value: 'yizhi',
-                label: '一致'
-              }, {
-                value: 'fankui',
-                label: '反馈'
-              }, {
-                value: 'xiaolv',
-                label: '效率'
-              }, {
-                value: 'kekong',
-                label: '可控'
-              }]
-            }, {
-              value: 'daohang',
-              label: '导航',
-              children: [{
-                value: 'cexiangdaohang',
-                label: '侧向导航'
-              }, {
-                value: 'dingbudaohang',
-                label: '顶部导航'
-              }]
-            }]
-          }, {
-            value: 'zujian',
-            label: '组件',
-            children: [{
-              value: 'basic',
-              label: 'Basic',
-              children: [{
-                value: 'layout',
-                label: 'Layout 布局'
-              }, {
-                value: 'color',
-                label: 'Color 色彩'
-              }, {
-                value: 'typography',
-                label: 'Typography 字体'
-              }, {
-                value: 'icon',
-                label: 'Icon 图标'
-              }, {
-                value: 'button',
-                label: 'Button 按钮'
-              }]
-            }, {
-              value: 'form',
-              label: 'Form',
-              children: [{
-                value: 'radio',
-                label: 'Radio 单选框'
-              }, {
-                value: 'checkbox',
-                label: 'Checkbox 多选框'
-              }, {
-                value: 'input',
-                label: 'Input 输入框'
-              }, {
-                value: 'input-number',
-                label: 'InputNumber 计数器'
-              }, {
-                value: 'select',
-                label: 'Select 选择器'
-              }, {
-                value: 'cascader',
-                label: 'Cascader 级联选择器'
-              }, {
-                value: 'switch',
-                label: 'Switch 开关'
-              }, {
-                value: 'slider',
-                label: 'Slider 滑块'
-              }, {
-                value: 'time-picker',
-                label: 'TimePicker 时间选择器'
-              }, {
-                value: 'date-picker',
-                label: 'DatePicker 日期选择器'
-              }, {
-                value: 'datetime-picker',
-                label: 'DateTimePicker 日期时间选择器'
-              }, {
-                value: 'upload',
-                label: 'Upload 上传'
-              }, {
-                value: 'rate',
-                label: 'Rate 评分'
-              }, {
-                value: 'form',
-                label: 'Form 表单'
-              }]
-            }, {
-              value: 'data',
-              label: 'Data',
-              children: [{
-                value: 'table',
-                label: 'Table 表格'
-              }, {
-                value: 'tag',
-                label: 'Tag 标签'
-              }, {
-                value: 'progress',
-                label: 'Progress 进度条'
-              }, {
-                value: 'tree',
-                label: 'Tree 树形控件'
-              }, {
-                value: 'pagination',
-                label: 'Pagination 分页'
-              }, {
-                value: 'badge',
-                label: 'Badge 标记'
-              }]
-            }, {
-              value: 'notice',
-              label: 'Notice',
-              children: [{
-                value: 'alert',
-                label: 'Alert 警告'
-              }, {
-                value: 'loading',
-                label: 'Loading 加载'
-              }, {
-                value: 'message',
-                label: 'Message 消息提示'
-              }, {
-                value: 'message-box',
-                label: 'MessageBox 弹框'
-              }, {
-                value: 'notification',
-                label: 'Notification 通知'
-              }]
-            }, {
-              value: 'navigation',
-              label: 'Navigation',
-              children: [{
-                value: 'menu',
-                label: 'NavMenu 导航菜单'
-              }, {
-                value: 'tabs',
-                label: 'Tabs 标签页'
-              }, {
-                value: 'breadcrumb',
-                label: 'Breadcrumb 面包屑'
-              }, {
-                value: 'dropdown',
-                label: 'Dropdown 下拉菜单'
-              }, {
-                value: 'steps',
-                label: 'Steps 步骤条'
-              }]
-            }, {
-              value: 'others',
-              label: 'Others',
-              children: [{
-                value: 'dialog',
-                label: 'Dialog 对话框'
-              }, {
-                value: 'tooltip',
-                label: 'Tooltip 文字提示'
-              }, {
-                value: 'popover',
-                label: 'Popover 弹出框'
-              }, {
-                value: 'card',
-                label: 'Card 卡片'
-              }, {
-                value: 'carousel',
-                label: 'Carousel 走马灯'
-              }, {
-                value: 'collapse',
-                label: 'Collapse 折叠面板'
-              }]
-            }]
-          }, {
-            value: 'ziyuan',
-            label: '资源',
-            children: [{
-              value: 'axure',
-              label: 'Axure Components'
-            }, {
-              value: 'sketch',
-              label: 'Sketch Templates'
-            }, {
-              value: 'jiaohu',
-              label: '组件交互文档'
-            }]
-          }]
-        };
+          options: [
+            {
+              value: '1',
+              label: '电脑数码',
+              children:[
+                {
+                  value: '1',
+                  label: '手机通讯',
+                },
+                {
+                  value: '2',
+                  label: '数码配件',
+                 }
+                ,
+                {
+                  value: '3',
+                  label: '软件游戏',
+                }
+                ,
+                {
+                  value: '4',
+                  label: '虚拟产品',
+                }
+                ,
+                {
+                  value: '5',
+                  label: '存储设备',
+                }
+                ,
+                {
+                  value: '6',
+                  label: '影音播放',
+                }
+                ,
+                {
+                  value: '7',
+                  label: '电脑整机',
+                }
+                ,
+                {
+                  value: '8',
+                  label: '电脑外设',
+                }
+                ,
+                {
+                  value: '9',
+                  label: '网络设备',
+                }
+                ,
+                {
+                  value: '10',
+                  label: '智能设备',
+                }
+                ,
+                {
+                  value: '11',
+                  label: '办公仪器',
+                }
+                ,
+                {
+                  value: '12',
+                  label: '文具用品',
+                }
+              ]
+            },
+            {
+              value: '2',
+              label: '家用电器',
+              children: [
+                {
+                  value: '1',
+                  label: '大家电',
+                },
+                {
+                  value: '2',
+                  label: '厨卫大电',
+                },
+                {
+                  value: '3',
+                  label: '生活电器',
+                },
+                {
+                  value: '4',
+                  label: '厨房小电',
+                },
+                {
+                  value: '5',
+                  label: '个护健康',
+                }
+
+              ]
+            },
+            {
+              value: '3',
+              label: '日用百货',
+              children: [
+                {
+                  value: '1',
+                  label: '宠物用品',
+                },
+                {
+                  value: '2',
+                  label: '厨房用具',
+                },
+                {
+                  value: '3',
+                  label: '生活用品',
+                },
+                {
+                  value: '4',
+                  label: '家居清洁',
+                },
+                {
+                  value: '5',
+                  label: '家装主材',
+                },
+                {
+                  value: '6',
+                  label: '五金电工',
+                },
+                {
+                  value: '7',
+                  label: '住宅家具',
+                },
+                {
+                  value: '8',
+                  label: '灯具灯饰',
+                },
+                {
+                  value: '9',
+                  label: '家纺布艺',
+                },
+                {
+                  value: '10',
+                  label: '家居饰品',
+                },
+                {
+                  value: '11',
+                  label: '园艺用品',
+                },
+
+
+              ]
+            },
+            {
+              value: '4',
+              label: '运动户外',
+              children: [
+                {
+                  value: '1',
+                  label: '运动服饰',
+                },
+                {
+                  value: '2',
+                  label: '户外装备',
+                },
+                {
+                  value: '3',
+                  label: '体育项目',
+                },
+                {
+                  value: '4',
+                  label: '运动器材',
+                },
+                {
+                  value: '5',
+                  label: '男装',
+                },
+                {
+                  value: '6',
+                  label: '女装',
+                },
+                {
+                  value: '7',
+                  label: '男包',
+                },
+                {
+                  value: '8',
+                  label: '女包',
+                },
+                {
+                  value: '9',
+                  label: '服装配饰',
+                },
+                {
+                  value: '10',
+                  label: '功能箱包',
+                },
+
+
+              ]
+            },
+            {
+              value: '5',
+              label: '个性化妆',
+              children: [
+                {
+                  value: '1',
+                  label: '彩妆产品',
+                },
+                {
+                  value: '2',
+                  label: '口腔护理',
+                },
+                {
+                  value: '3',
+                  label: '美发护发',
+                },
+                {
+                  value: '4',
+                  label: '眼睛护理',
+                },
+                {
+                  value: '5',
+                  label: '钟',
+                },
+                {
+                  value: '6',
+                  label: '手表',
+                },
+                {
+                  value: '7',
+                  label: '珠宝首饰',
+                },
+
+
+              ]
+            },
+            {
+              value: '6',
+              label: '母婴用品',
+              children: [
+                {
+                  value: '1',
+                  label: '奶粉',
+                },
+                {
+                  value: '2',
+                  label: '婴儿安全用品',
+                },
+                {
+                  value: '3',
+                  label: '喂养用品',
+                },
+                {
+                  value: '4',
+                  label: '童装',
+                },
+                {
+                  value: '5',
+                  label: '洗护用品',
+                },
+                {
+                  value: '6',
+                  label: '婴儿服饰',
+                },
+                {
+                  value: '7',
+                  label: '孕产妇用品',
+                },
+                {
+                  value: '8',
+                  label: '玩具',
+                },
+                {
+                  value: '9',
+                  label: '乐器',
+                }
+
+
+              ]
+            },
+            {
+              value: '7',
+              label: '食品生鲜',
+              children: [
+                {
+                  value: '1',
+                  label: '酒类',
+                },
+                {
+                  value: '2',
+                  label: '水饮',
+                },
+                {
+                  value: '3',
+                  label: '冲调饮品',
+                },
+                {
+                  value: '4',
+                  label: '粮油调味',
+                },
+                {
+                  value: '5',
+                  label: '生鲜食品',
+                },
+                {
+                  value: '6',
+                  label: '休闲食品',
+                },
+                {
+                  value: '7',
+                  label: '节日食品',
+                }
+
+
+              ]
+            },
+            {
+              value: '8',
+              label: '文化娱乐',
+              children: [
+                {
+                  value: '1',
+                  label: '礼品',
+                },
+                {
+                  value: '2',
+                  label: '音像制品',
+                },
+                {
+                  value: '3',
+                  label: '图书杂志',
+                },
+                {
+                  value: '4',
+                  label: '电子书刊',
+                },
+                {
+                  value: '5',
+                  label: '在线教育',
+                },
+                {
+                  value: '6',
+                  label: '票务',
+                }
+
+              ]
+            }
+
+
+
+
+          ],
+          post:{
+            authorid : this.$store.getters.getUser.uId,
+            authorname: this.$store.getters.getUser.uName,
+            beginTime: "",
+            codeone: 1,
+            codetwo: 1,
+            collectnum: 0,
+            content: "",
+            endTime:'',
+            id: 0,
+            ip: '127.0.0.1',
+            likenum: 0,
+            picurl: this.imageUrl,
+            titlename : this.input,
+            unlikenum: 0
+
+          }
+
+        }; //return
       },
 
       methods: {
+          //发布帖子
+        releaseButton(){
+          document.getElementById("save").click();
+          this.post.content=this.text;
+
+          var vm =this;
+          // console.log(JSON.stringify(this.post));
+          // console.log(JSON.stringify(this.post.picurl));
+          // console.log(JSON.stringify(this.imageUrl));
+
+          this.axios.post('http://39.106.120.220:81/title',{
+            authorid : this.post.authorid,
+            authorname: this.post.authorname,
+            beginTime: this.post.beginTime,
+            codeone: this.post.codeone,
+            codetwo: this.post.codetwo,
+            collectnum: this.post.collectnum,
+            content:this.post.content,
+            endTime:this.post.endTime,
+            id: this.post.id,
+            ip: this.post.ip,
+            likenum: this.post.likenum,
+            picurl: this.imageUrl,
+            titlename: this.post.titlename,
+            unlikenum: this.post.unlikenum
+          }).then(function (resp) {
+
+            if(resp.data.success){
+              //再在home.vue里获取vuex对象里的user对象的内容。
+              vm.$message({
+                message: resp.data.message,
+                type: 'success'
+              });
+              setTimeout(function(){
+                vm.$router.push("/home");
+              },2000)
+            }else{
+              vm.$message.error(resp.data.message);
+            }
+
+          }).catch(function (error) {
+            console.log(error)
+          })
+
+        },
+        //设置类别
+        OnClick(item){
+          // var list=new Array();
+          // list= this.$refs['myCascader'].currentLabels;
+          // console.log(item[0]);
+          this.post.codeone=item[0];
+          this.post.codetwo=item[1];
+
+        },
+        //设置时间
+        OnClick2(item){
+          // console.log(item[0]);
+          // console.log(item[1]);
+          this.post.beginTime=item[0];
+          this.post.endTime=item[1];
+          // this.post.
+        },
+
         goBack() {
           console.log('go back');
           history.back();
@@ -311,8 +547,11 @@
 
         },
         handleAvatarSuccess(res, file) {
-          this.imageUrl = URL.createObjectURL(file.raw);
-          alert(this.imageUrl);
+
+          // this.imageUrl = URL.createObjectURL(file.raw);
+          // this.imageUrl=this.imageUrl.replace('localhost','')
+          this.imageUrl=res.data;
+          // alert(this.imageUrl);
         },
         beforeAvatarUpload(file) {
           const isJPG = file.type === 'image/jpeg';
@@ -339,7 +578,7 @@
   .back{
     position: relative;
     left: -140px;
-    
+
   }
   .successButtonDiv{
     text-align: center;
@@ -431,7 +670,7 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    
+
   }
   .avatar-uploader .el-upload:hover {
     border-color: #409EFF;

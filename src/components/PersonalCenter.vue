@@ -66,11 +66,11 @@
           </div>
           <el-divider ></el-divider>
           <el-tabs v-model="activeName" type="card" @tab-click="handleClick(activeName)">
-            <el-tab-pane label="我的帖子" name="first" ><h2>我的帖子</h2></el-tab-pane>
-            <el-tab-pane label="我的收藏" name="second" ><h2>我的收藏</h2></el-tab-pane>
-            <el-tab-pane label="我的评论" name="third" ><h2>我的评论</h2></el-tab-pane>
-            <el-tab-pane label="我的关注" name="fourth" ><h2>我的关注</h2></el-tab-pane>
-            <el-tab-pane label="我的粉丝" name="fifth" ><h2>我的粉丝</h2></el-tab-pane>
+            <el-tab-pane label="我的帖子" name="first" ></el-tab-pane>
+            <el-tab-pane label="我的收藏" name="second" ></el-tab-pane>
+            <el-tab-pane label="我的评论" name="third" ></el-tab-pane>
+            <el-tab-pane label="我的关注" name="fourth" ></el-tab-pane>
+            <el-tab-pane label="我的粉丝" name="fifth" ></el-tab-pane>
           </el-tabs>
 
           <div class="listDiv">
@@ -88,7 +88,7 @@
       <el-footer>Footer</el-footer>
     </el-container>
   </body>
-    
+
 </template>
 
 <script>
@@ -133,7 +133,9 @@
           },
           handleClick(activename) {
             if(activename=="first"){
-              this.$router.push({path:'/personalCenter/MyPostsList'})
+              this.$router.push({path:'/personalCenter/MyPostsList'});
+
+              // console.log( window.location.pathname)
             }else if(activename=="second"){
               this.$router.push({path:'/personalCenter/MyFavoriteList'})
             }
@@ -177,6 +179,29 @@
 
 
         },
+        //根据路径，跳转页面标签
+        created: function () {
+          let path = window.location.pathname;
+          // console.log(path);
+          if(path=='/personalCenter/MyPostsList'){
+            this.activeName='first'
+          }else if(path=='/personalCenter/MyFavoriteList'){
+            this.activeName='second'
+          }else if(path=='/personalCenter/CommentList'){
+            this.activeName='third'
+          }else if(path=='/personalCenter/UserListConcerns'){
+            this.activeName='fourth'
+          }else if(path=='/personalCenter/UserListFans'){
+            this.activeName='fifth'
+          }else{
+            this.activeName='first'
+          }
+
+        },
+
+
+
+
       components: {
         Navigation,
         Recommond,

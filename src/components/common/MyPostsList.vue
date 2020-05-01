@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h2>我的帖子</h2>
+
     <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto" >
       <li v-for="item in 10" :key="item">
         <div class="div3-1">
@@ -19,7 +21,8 @@
           </div>
           <div class="time">
             2020年4月17日23:55:39 &nbsp;&nbsp;&nbsp;
-            <i class="el-icon-thumb"> 点赞数:99</i> &nbsp;&nbsp;&nbsp;
+            <i class="el-icon-thumb"> 点赞数:99</i>&nbsp;&nbsp;
+            <i class="el-icon-thumb"> 点踩数:99</i> &nbsp;&nbsp;&nbsp;
             <i class="el-icon-star-off">收藏数:899</i>
             <div class="buttonDiv">
               <el-button class="link" type="primary" @click="gotoDetailsPage()">查看详情</el-button>

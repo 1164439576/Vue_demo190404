@@ -20,8 +20,9 @@ Vue.use(VueQuillEditor)
 // Vue.use(qs)
 
 Vue.config.productionTip = false
-Vue.use(Vuex)
+Vue.use(Vuex);
 Vue.use(VueRouter);
+Vue.use(router);
 
 
 Vue.use(ElementUI);

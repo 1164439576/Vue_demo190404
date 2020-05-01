@@ -47,10 +47,13 @@
           </el-button>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item ><span @click="gotoPersonalCenter()">个人中心</span></el-dropdown-item>
-            <el-dropdown-item>我的关注</el-dropdown-item>
-            <el-dropdown-item>我的帖子</el-dropdown-item>
-            <el-dropdown-item>我的评论</el-dropdown-item>
-            <el-dropdown-item>退出登录</el-dropdown-item>
+            <el-dropdown-item><span @click="gotoMyPostsList()">我的帖子</span></el-dropdown-item>
+            <el-dropdown-item><span @click="gotoMyFavoriteList()">我的收藏</span></el-dropdown-item>
+            <el-dropdown-item><span @click="gotoCommentList()">我的评论</span></el-dropdown-item>
+            <el-dropdown-item><span @click="gotoUserListConcerns()">我的关注</span></el-dropdown-item>
+            <el-dropdown-item><span @click="gotoUserListFans()">我的粉丝</span></el-dropdown-item>
+            <el-dropdown-item><span @click="gotosettingPage()">账户设置</span></el-dropdown-item>
+            <el-dropdown-item><span @click="gotoLogin()">退出登录</span></el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-menu>
@@ -89,7 +92,29 @@
         },
         gotoReleasePost(){
           this.$router.push({path:'/releasePost'})
-        }
+        },
+        gotoLogin(){
+          this.$router.push({path:'/logout'})
+        },
+        gotoMyPostsList(){
+          this.$router.push({path:'/personalCenter/MyPostsList'})
+        },
+        gotoMyFavoriteList(){
+          this.$router.push({path:'/personalCenter/MyFavoriteList'})
+        },
+        gotoCommentList(){
+          this.$router.push({path:'/personalCenter/CommentList'})
+        },
+        gotoUserListConcerns(){
+          this.$router.push({path:'/personalCenter/UserListConcerns'})
+        },
+        gotoUserListFans(){
+          this.$router.push({path:'/personalCenter/UserListFans'})
+        },
+        gotosettingPage(){
+          this.$router.push({path:'/settingPage'})
+        },
+
       }
 
     }

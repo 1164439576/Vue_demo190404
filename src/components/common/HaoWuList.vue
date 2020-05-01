@@ -52,8 +52,8 @@
             </h2>
             <div class="author">
               <div class="demo-type">
-                <el-avatar :size="60" src="https://empty" @error="errorHandler">
-                  <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+                <el-avatar :size="60" src="https://empty" >
+                  <img :src="src"/>
                 </el-avatar>
               </div>
               <span class="author-name"> sss </span>
@@ -88,7 +88,12 @@
       data() {
         return {
           src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-          count: 0
+          count: 0,
+
+
+
+
+
         }
       },
       methods:{
@@ -97,9 +102,20 @@
         },
         load () {
           this.count =5
-        }
+        },
 
-      }
+
+      },//methods
+
+      //TODO 根据 codeone  和codetwo 查询帖子list
+      created(){
+
+      },
+
+      props: [
+        'codeone',
+        'codetwo'
+      ]
     }
 </script>
 
@@ -163,8 +179,8 @@
     height: 200px;
   }
 
-  
-  
+
+
 
   #div0{
     width: 100%;

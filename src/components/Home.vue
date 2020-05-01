@@ -47,6 +47,10 @@
           pros:null,
           uName:this.$store.getters.getUser.uName,
           islogin: this.$store.getters.getUser==null?false:true,
+          //轮播图数组
+          slideshow:[],
+
+
         };
       },
       methods: {
@@ -64,6 +68,55 @@
           this.$router.push({path:'/personalCenter'})
         }
       },
+      created(){
+        console.log("created");
+
+      },
+      created(){
+        //轮播图
+        //TODO 2020年4月30日22:52:14 实现轮播图
+        var vm =this;
+
+        /*this.axios.post('http://39.106.120.220:81/user',{
+          "uAddress": null,
+          "uCreateTime": null,
+          "uEmail": null,
+          "uEnable": null,
+          "uEx": null,
+          "uGoldnum": null,
+          "uHeadurl": null,
+          "uId": null,
+          "uName": this.ruleForm.username,
+          "uPassword": this.ruleForm.pass,
+          "uProfile": null,
+          "uSex": null,
+          "uTel": this.ruleForm.userTel,
+          "uTitlenum": null,
+          "uUpdateTime": null
+
+        }).then(function (resp) {
+
+          if(resp.data.data){
+            // alert('submit!');
+            vm.$message({
+              message: resp.data.message,
+              type: 'success'
+            });
+            setTimeout(function(){
+              // vm.$router.push("/orders");
+              vm.$router.push({path:'/Login'})
+            },2000)
+          }else{
+            vm.$message.error(resp.data.message);
+          }
+
+        }).catch(function (error) {
+          console.log(error)
+        })*/
+
+      },
+
+
       components: {
         Classification,
         Infinitelist,

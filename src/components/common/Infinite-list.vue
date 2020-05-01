@@ -1,49 +1,120 @@
 <template>
   <body>
-  <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto" >
-    <li v-for="item in 10" :key="item">
+  <ul class="infinite-list" v-infinite-scroll="load"   v-loading="listLoading" style="overflow:auto" >
+    <li v-for="(item ,i) in posts" :key="i">
       <div class="div3-1">
-        <img :src="src" class="img1" @click="gotoDetailsPage()"/>
+        <img :src="item.picurl" class="img1" @click="gotoDetailsPage()"/>
       </div>
       <div class="div3-2">
         <h2 class="title">
-          Wyeth 惠氏 蓝钻启赋 幼儿配方奶粉 3段 900g    &nbsp;&nbsp;&nbsp; 价格：238.83包邮
+         {{item.titlename}}
         </h2>
         <div class="author">
           <div class="demo-type">
             <el-avatar :size="60" src="https://empty" >
-              <img src="http://39.106.120.220/group1/M00/00/00/J2p43F6bxYeAKgswAADaazaI7BY048.jpg"/>
+
+              <img  v-if="item.userPicURl!=''" :src="item.userPicURl"/>
+              <img  v-else="item.userPicURl==null" src="http://39.106.120.220/group1/M00/00/00/J2p43F6bxYeAKgswAADaazaI7BY048.jpg"/>
             </el-avatar>
           </div>
-          <span class="author-name"> 繁星、晚风 </span>
+          <span class="author-name"> {{item.authorname}} </span>
         </div>
         <div class="time">
-          2020年4月17日23:55:39 &nbsp;&nbsp;&nbsp;
-          <i class="el-icon-thumb"> 点赞数:99</i> &nbsp;&nbsp;&nbsp;
-          <i class="el-icon-star-off">收藏数:899</i>
+          <b>{{item.posttime}} &nbsp;</b>
+          <i class="el-icon-thumb"> <b>点赞数:{{item.likenum}}</b></i> &nbsp; &nbsp;<i class="el-icon-thumb"> <b> 点踩数:{{item.unlikenum}}</b></i>  &nbsp; &nbsp;
+          <i class="el-icon-star-off"><b>收藏数:{{item.collectnum}}</b></i>
+
           <el-button class="link" type="primary" @click="gotoDetailsPage()"><b>查看详情</b></el-button>
         </div>
       </div>
     </li>
   </ul>
-  <el-pagination
+  <!--<el-pagination
     class="fenye"
     background
     layout="prev, pager, next"
     :total="100">
-  </el-pagination>
+  </el-pagination>-->
+  <div class="paginationDiv">
+    <template >
+      <pagination
+        class="pagination"
+        :total="total"
+        :page.sync="listQuery.page"
+        :limit.sync="listQuery.limit"
+        @pagination="getList" />
+    </template>
+  </div>
+
+
   </body>
 
 
 </template>
 
 <script>
-      export default {
+  import Pagination from './Pagination'
+
+  export default {
         name: "Infinite-list",
         data () {
           return {
+            listLoading:false,
+
             count: 10,
-            src:"http://39.106.120.220/group1/M00/00/00/J2p43F6dGxSAZtLVAAEI4WlUlsY434.jpg"
+            src:"http://39.106.120.220/group1/M00/00/00/J2p43F6dGxSAZtLVAAEI4WlUlsY434.jpg",
+
+            total: 200,
+            listQuery: {
+              page: 1,
+              limit: 200
+            },
+
+
+            posts:[
+              {
+                authorid: 1,
+                authorname: "晚风",
+                beginTime: "2020年4月17日23:55:39",
+                codeone: '电脑数码',
+                codetwo: '手机',
+                collectnum: 44,
+                content: "<p>好好用啊</p>>",
+                endTime: "2020年4月17日23:55:39",
+                id: 0,
+                ip: "string",
+                likenum: 110,
+                picurl: "http://39.106.120.220/group1/M00/00/00/J2p43F6qh0GAM9LmAAEuSIdYPUs432.jpg",
+                posttime: "2020年4月17日23:55:39",
+                titlename: "666666666",
+                unlikenum: 4,
+                //添加用户头像
+                userPicURl:'',
+
+              },
+              {
+                authorid: 1,
+                authorname: "晚风",
+                beginTime: "2020年4月17日23:55:39",
+                codeone: '电脑数码',
+                codetwo: '手机',
+                collectnum: 44,
+                content: "<p>好好用啊</p>>",
+                endTime: "2020年4月17日23:55:39",
+                id: 0,
+                ip: "string",
+                likenum: 110,
+                picurl: "http://39.106.120.220/group1/M00/00/00/J2p43F6qh0GAM9LmAAEuSIdYPUs432.jpg",
+                posttime: "2020年4月17日23:55:39",
+                titlename: "666666666",
+                unlikenum: 4,
+                userPicURl:'',
+              },
+
+            ],
+
+
+
           }
         },
         methods: {
@@ -52,9 +123,48 @@
           },
           gotoDetailsPage(){
             this.$router.push({path:'/DetailsPage'})
-          }
+          },
+
+          getList() {
+            this.listLoading = true
+            //TODO 2020年4月30日19:29:26 分页获取数据  百度一下
+            // 获取数据
+
+            setTimeout(() => {
+              this.listLoading = false
+            }, 1000)
+          },
+
+        },
+        components: { Pagination },
+
+        created() {
+          //TODO  2020年4月30日19:14:35 请完善 获取热门展示 list，获取帖子list
+          var vm =this;
+          /*this.axios.get('http://39.106.120.220:81/titlelist2?page=5')
+            .then(function (resp) {
+
+            if(resp.data.success){
+              //再在home.vue里获取vuex对象里的user对象的内容。
+              vm.$message({
+                message: resp.data.message,
+                type: 'success'
+              });
+              setTimeout(function(){
+                vm.$router.push("/home");
+              },2000)
+            }else{
+              vm.$message.error(resp.data.message);
+            }
+
+          }).catch(function (error) {
+            console.log(error)
+          })*/
+
+
 
         }
+
       }
 
 </script>
@@ -62,12 +172,17 @@
 
 
 <style scoped>
+
+
+  .paginationDiv{
+    line-height: 10px;
+  }
   .fenye{
     line-height: 30px;
   }
   .link{
     position: relative;
-    left: 80%;
+    left: 60%;
     top: 5px;
     background-color: transparent;
     color: darkturquoise;
@@ -94,11 +209,12 @@
     position: relative;
   }
 
-  .time{
+  .time {
     text-align: left;
     line-height: 20px;
     font-size: 18px;
     height: 50px;
+
   }
 
   .author-name{

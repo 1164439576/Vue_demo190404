@@ -112,7 +112,7 @@
               }).then(function (resp) {
 
                 if(resp.data.data){
-                  alert('submit!');
+                  // alert('submit!');
                   vm.$message({
                     message: resp.data.message,
                     type: 'success'
